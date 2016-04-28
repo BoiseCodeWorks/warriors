@@ -1,0 +1,101 @@
+<html ng-app="battlegrounds">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body class="container-fluid">
+
+    <div ng-controller="WarriorsController as wsc" class="row">
+
+        <div class="col-sm-4" ng-repeat="warrior in wsc.warriors">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h4>
+                        <img height="80" ng-src="{{warrior.photo}}"> {{warrior.name}}</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="(stat, value) in warrior.stats">
+                            {{stat}}: {{value}}
+                        </li>
+                        <li class="list-group-item">
+                            <div class="button-group">
+                                <button type="button" class="btn btn-primary" ng-click="wsc.editWarrior(warrior)">Edit</button>
+                                <button type="button" class="btn btn-danger" ng-click="wsc.removeWarrior($index)">Delete</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>
+                        ADD WARRIOR
+                </div>
+                <div class="panel-body">
+                    <form ng-submit="wsc.addWarrior(wsc.warriorFromForm)"class="form">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" ng-model="wsc.warriorFromForm.name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender:</label>
+                            <input type="text" ng-model="wsc.warriorFromForm.gender" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="era">Era:</label>
+                            <input type="text" ng-model="wsc.warriorFromForm.era" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="stats">Stats:</label>
+                            <div class="form-group">
+                                <label for="speed">Speed:</label>
+                                <input type="text" ng-model="wsc.warriorFromForm.stats.speed" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="stamina">Stamina:</label>
+                                <input type="text" ng-model="wsc.warriorFromForm.stats.stamina" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="strength">Strength:</label>
+                                <input type="text" ng-model="wsc.warriorFromForm.stats.strength" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="spirit">Spirit:</label>
+                                <input type="text" ng-model="wsc.warriorFromForm.stats.spirit" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Photo:</label>
+                            <input type="text" ng-model="wsc.warriorFromForm.photo" class="form-control">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-success" type="submit">Add</button>
+                            <button class="btn btn-danger" type="reset">Clear</button>
+                        </div>
+                    </form>
+                </div>
+<!--        
+        <div ng-controller="WarriorController as wc" class="row">
+            {{wc.test}}
+        </div>-->
+    </div>
+
+    <script src="node_modules/angular/angular.js"></script>
+
+    <script src="app/modules/warriors/warriors-module.js"></script>
+    <script src="app/modules/warriors/warriors-controller.js"></script>
+    <script src="app/modules/warriors/warrior-controller.js"></script>
+    <script src="app/modules/warriors/warriors-service.js"></script>
+
+    <script src="app/main-app.js"></script>
+
+</body>
+
+</html>
